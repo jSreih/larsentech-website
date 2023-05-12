@@ -6,17 +6,41 @@
 <head>  
 </head>
 <title> LarsenTech </title>
-<h1> Hello World </h1>
+
+
+<div class="header">
+    <a href="#default" class="logo">Hello World</a>
+</div>
+
 <style>  
-h1 {
-    color:rgb(232, 8, 8);
-    font-family: "Lucida Console", "Courier New", monospace;
+
+.header {
+    overflow:hidden;
+    background-color: rgb(252, 252, 252);
+    padding: 20px 10px;
     text-align: center;
 }
+
+.header a{
+    float: left;
+    color: #cb1717;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+.header a:hover{
+    background-color: rgb(106, 106, 106);
+    color: #000000;
+}
+
 body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 
 /* NAV BAR --------------------- */
 .navbar {
