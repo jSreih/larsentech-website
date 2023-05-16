@@ -3,34 +3,49 @@
     <head> 
         <meta charset=UTF-8 />
         <link rel="sylesheet" type="text/css" href="styles.css" />
+        <script src="three.js" ></script>
+        <script src="GLTFLoader.js" ></script>
     </head>
 
     <body>
-        <script src="three.min.js" ></script>
-        <script src="GLTFLoader.js" ></script>
-        <script>
-
-            let scene, camera ,renderer; 
-            
-            function init() {
-                scene = new THREE.Scene();
-                scene.background = new THREE.Color(0xdddddd);
-
-                camera = new THREE.PerspectibeCamera(40, window,innerWidth/window.innerHeight, 1, 5);
-                hlight = new THREE.AmbientLight (0x404040,100);
-                scene.add(hlight);
-
-                renderer = new THREE.WebGLRenderer({antialias:true});
-                renderer.setSize(window.innerWidth,window.innerHeight);
-                document.body.appendChild(renderer.domElement);  
-
-                let loader = new THREE.GTFLoader();
-                loader.load('scene.gltf', function(gltf){
-                    scene.add(gltf.scene);
-                    renderer.render(scene,camera);
-                });
+        <div id="scene-container"></div>
+        <style>
+            #scene-container {
+                width: 100%;
+                height: 400px;
             }
-            init();
+        </style>
+        <script>
+            const scene = new THREE.scene();
+
+            const camera = new THREE.PerspectiveCamera(
+                75, // field of view
+                window.innerWidth / window.innerHeight,  // Aspect ratio
+                0.1, // Near clipping plane
+                1000 // Far clipping plane
+            );
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('scene-container').appendChild(renderer.domElement);
+
+            
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(1, 1, 1).normalize();
+            scene.add(light);
+
+            const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+            
+            const loader = new THREE.GLTFLoader();
+            loader.load('scene.gltf', (gltf) => {
+                scene.add(gltf.scene);
+            });
+
+
+            function animate() {
+                requestAnimationFrame(animate);
+            }
+  
         </script>
     </body>
 </html>
